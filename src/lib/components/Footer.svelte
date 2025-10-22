@@ -1,50 +1,104 @@
 <!-- Footer -->
-<footer class="border-t bg-gray-50 dark:bg-gray-900 dark:border-gray-700">
+<footer class="border-t bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
 	<div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-			<div>
-				<h3 class="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white">Company</h3>
-				<ul class="mt-4 space-y-2">
-					<li><a href="/about" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">About</a></li>
-					<li><a href="/careers" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Careers</a></li>
-					<li><a href="/contact" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Contact</a></li>
-				</ul>
-			</div>
-			<div>
-				<h3 class="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white">Resources</h3>
-				<ul class="mt-4 space-y-2">
-					<li>
-						<a href="https://svelte.dev/docs" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-							>Documentation</a
+			<!-- Copyright + CC License Column -->
+			<div class="flex flex-col space-y-4">
+				<div class="flex items-center space-x-3">
+					<img src="/images/logo.svg" alt="Logo" class="h-8 w-8" />
+					<span class="text-lg font-medium text-gray-900 dark:text-white"
+						><a href="/">任氏有无轩</a></span
+					>
+				</div>
+				<div class="space-y-2">
+					<p class="text-xs text-gray-600 dark:text-gray-400">
+						© 1989 - 2024 <a href="/">任氏有无轩</a>
+					</p>
+					<div class="flex items-center space-x-2">
+						<span class="text-xs text-gray-600 dark:text-gray-400">本站点按照</span>
+						<a
+							href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+							class="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
-					</li>
-					<li>
-						<a href="https://svelte.dev/tutorial" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-							>Tutorial</a
-						>
-					</li>
-					<li>
-						<a href="https://svelte.dev/examples" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-							>Examples</a
-						>
-					</li>
-				</ul>
+							CC BY-NC-ND-SA 4.0
+						</a>
+						<span class="text-xs text-gray-600 dark:text-gray-400">许可证发布</span>
+					</div>
+				</div>
 			</div>
-			<div>
-				<h3 class="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white">Connect</h3>
-				<ul class="mt-4 space-y-2">
-					<li>
-						<a href="https://twitter.com" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Twitter</a>
-					</li>
-					<li><a href="https://github.com" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">GitHub</a></li>
-					<li>
-						<a href="https://discord.com" class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Discord</a>
-					</li>
-				</ul>
+
+			<!-- Tech Framework Declaration Column -->
+			<div class="space-y-4">
+				<h3 class="text-sm font-semibold text-gray-900 dark:text-white">技术框架</h3>
+				<div class="space-y-2">
+					<div class="flex items-center space-x-2">
+						<span class="text-xs text-gray-600 dark:text-gray-400">前端：</span>
+						<a
+							href="https://svelte.dev"
+							class="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							SvelteKit
+						</a>
+					</div>
+					<div class="flex items-center space-x-2">
+						<span class="text-xs text-gray-600 dark:text-gray-400">CSS样式：</span>
+						<a
+							href="https://tailwindcss.com"
+							class="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Tailwind CSS
+						</a>
+					</div>
+					<div class="flex items-center space-x-2">
+						<span class="text-xs text-gray-600 dark:text-gray-400">UI组件：</span>
+						<a
+							href="https://shadcn-svelte.com"
+							class="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							shadcn-svelte
+						</a>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8">
-			<p class="text-center text-sm text-gray-500 dark:text-gray-400">© 2024 Your App. All rights reserved.</p>
+
+			<!-- Family Members Column -->
+			<div class="space-y-4">
+				<h3 class="text-sm font-semibold text-gray-900 dark:text-white">家庭成员</h3>
+				<div class="flex items-center space-x-3">
+					<img
+						src="/images/tr.webp"
+						alt="TR"
+						title="TR the Father"
+						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+					/>
+					<img
+						src="/images/gr.webp"
+						alt="GR"
+						title="GR the Mother"
+						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+					/>
+					<img
+						src="/images/pr.webp"
+						alt="PR"
+						title="PR the Son"
+						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+					/>
+					<img
+						src="/images/rt.webp"
+						alt="RT"
+						title="Rafael the Tortoise"
+						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+					/>
+				</div>
+			</div>
 		</div>
 	</div>
 </footer>
