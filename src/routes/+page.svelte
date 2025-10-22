@@ -44,7 +44,7 @@
 	<div class="mt-12">
 		<h2 class="mb-6 text-center text-2xl font-bold text-gray-900 dark:text-white">🚀 Server-Side Rendering Demo</h2>
 		<div class="mx-auto max-w-2xl">
-			<Card class="border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50">
+			<Card class="border-2 border-blue-200 bg-linear-to-br from-blue-50 to-indigo-50">
 				<CardHeader>
 					<CardTitle class="flex items-center gap-2">
 						📚 Books API Status
@@ -60,7 +60,7 @@
 					{#if data.error}
 						<div class="rounded-md bg-red-50 p-4">
 							<div class="flex">
-								<div class="flex-shrink-0">
+								<div class="shrink-0">
 									<span class="text-red-400">❌</span>
 								</div>
 								<div class="ml-3">
@@ -72,7 +72,7 @@
 					{:else if data.booksStatus}
 						<div class="rounded-md bg-green-50 p-4">
 							<div class="flex">
-								<div class="flex-shrink-0">
+								<div class="shrink-0">
 									<span class="text-green-400">✅</span>
 								</div>
 								<div class="ml-3">
@@ -91,7 +91,7 @@
 					{:else}
 						<div class="rounded-md bg-yellow-50 p-4">
 							<div class="flex">
-								<div class="flex-shrink-0">
+								<div class="shrink-0">
 									<span class="text-yellow-400">⚠️</span>
 								</div>
 								<div class="ml-3">

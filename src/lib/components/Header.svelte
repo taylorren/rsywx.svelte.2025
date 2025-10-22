@@ -46,7 +46,7 @@
 			<div class="flex items-center space-x-2 md:hidden">
 				<ThemeToggle />
 				<button
-					on:click={toggleMobileMenu}
+					onclick={toggleMobileMenu}
 					class="rounded-md p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300 transition-colors"
 					aria-label="Toggle mobile menu"
 				>
@@ -71,19 +71,19 @@
 				<div class="px-2 pt-2 pb-3 space-y-1">
 					<a
 						href="/"
-						on:click={closeMobileMenu}
+						onclick={closeMobileMenu}
 						class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-700 dark:text-white dark:hover:bg-gray-800 dark:hover:text-gray-300"
 						>Home</a
 					>
 					<a
 						href="/about"
-						on:click={closeMobileMenu}
+						onclick={closeMobileMenu}
 						class="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
 						>About</a
 					>
 					<a
 						href="/contact"
-						on:click={closeMobileMenu}
+						onclick={closeMobileMenu}
 						class="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
 						>Contact</a
 					>
