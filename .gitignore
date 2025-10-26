@@ -230,3 +230,5 @@ common/autoinstallers/*/.npmrc
 
 # Stores
 .nx/cache
+# WebP images
+*.webp

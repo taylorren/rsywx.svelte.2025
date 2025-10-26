@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ThemeToggle from './ThemeToggle.svelte';
+	import ThemeToggle from '../ThemeToggle.svelte';
 	import { onMount } from 'svelte';
 
 	let mobileMenuOpen = $state(false);
@@ -158,7 +158,7 @@
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
-								d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+								d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
 							/>
 						</svg>
 					</a>
@@ -268,7 +268,7 @@
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
-								d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+								d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
 							/>
 						</svg>
 					</a>

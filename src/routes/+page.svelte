@@ -6,7 +6,11 @@
 		CardHeader,
 		CardTitle
 	} from '$lib/components/ui/card';
-	import HeroCarousel from '$lib/components/HeroCarousel.svelte';
+	import HeroCarousel from '$lib/components/home/HeroCarousel.svelte';
+	import LibraryStatsCard from '$lib/components/home/LibraryStatsCard.svelte';
+	import LatestBookCard from '$lib/components/home/LatestBookCard.svelte';
+	import LastVisitedCard from '$lib/components/home/LastVisitedCard.svelte';
+	import RandomBooksCard from '$lib/components/home/RandomBooksCard.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -27,43 +31,30 @@
 
 	<!-- Feature Cards -->
 	<div class="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-		<!-- Card with Image -->
-		<Card class="overflow-hidden">
-			<div class="aspect-video w-full overflow-hidden">
-				<img
-					src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=200&fit=crop&crop=center"
-					alt="Fast Development"
-					class="h-full w-full object-cover transition-transform hover:scale-105"
-				/>
-			</div>
-			<CardHeader>
-				<CardTitle>⚡ Fast Development</CardTitle>
-				<CardDescription>
-					Hot module replacement and instant updates for lightning-fast development experience
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<p class="text-sm text-gray-600">
-					SvelteKit provides an exceptional developer experience with instant feedback and minimal
-					configuration.
-				</p>
-			</CardContent>
-		</Card>
 
-		<Card>
-			<CardHeader>
-				<CardTitle>🎯 Type Safety</CardTitle>
-				<CardDescription>
-					Full TypeScript support with excellent type inference and compile-time error checking
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<p class="text-sm text-gray-600">
-					Catch errors early and build more reliable applications with comprehensive TypeScript
-					integration.
-				</p>
-			</CardContent>
-		</Card>
+		<LibraryStatsCard 
+			booksStatus={data.booksStatus} 
+			error={(data as any).statusError || data.error} 
+			fetchedAt={data.fetchedAt} 
+		/>
+
+		<LatestBookCard 
+			latestBook={(data as any).latestBook} 
+			error={(data as any).latestError || data.error} 
+			fetchedAt={data.fetchedAt} 
+		/>
+
+		<LastVisitedCard 
+			lastVisitedBook={(data as any).lastVisitedBook} 
+			error={(data as any).lastVisitedError || data.error} 
+			fetchedAt={data.fetchedAt} 
+		/>
+
+		<!-- Random Books Card - Full Width -->
+		<RandomBooksCard 
+			initialRandomBooks={(data as any).randomBooks} 
+			error={(data as any).randomError || data.error} 
+		/>
 
 		<!-- Card with Image -->
 		<Card class="overflow-hidden">

@@ -4,18 +4,12 @@
 
 <button
 	on:click={theme.toggle}
-	class="rounded-md p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300 transition-colors"
+	class="rounded-md p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
 	aria-label="Toggle theme"
 >
 	{#if $theme === 'light'}
 		<!-- Moon icon for dark mode -->
-		<svg
-			class="h-5 w-5"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			stroke-width="2"
-		>
+		<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 			<path
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -24,13 +18,7 @@
 		</svg>
 	{:else}
 		<!-- Sun icon for light mode -->
-		<svg
-			class="h-5 w-5"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			stroke-width="2"
-		>
+		<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 			<path
 				stroke-linecap="round"
 				stroke-linejoin="round"
