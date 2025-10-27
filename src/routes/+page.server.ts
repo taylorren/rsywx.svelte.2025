@@ -8,12 +8,13 @@ export const load: ServerLoad = async ({ fetch }) => {
 	};
 
 	try {
-		// Fetch books status, latest book, last visited book, and random books in parallel
-		const [statusResponse, latestResponse, lastVisitedResponse, randomResponse] = await Promise.all([
+		// Fetch books status, latest book, last visited book, random books, and reading summary in parallel
+		const [statusResponse, latestResponse, lastVisitedResponse, randomResponse, readingSummaryResponse] = await Promise.all([
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/status`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/latest/1`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/last_visited/1`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/random/4`, { headers })
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/random/4`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/summary`, { headers })
 		]);
 
 		const results: any = { fetchedAt };
@@ -54,6 +55,15 @@ export const load: ServerLoad = async ({ fetch }) => {
 			results.randomError = `HTTP error! status: ${randomResponse.status}`;
 		}
 
+		// Handle reading summary response
+		if (readingSummaryResponse.ok) {
+			results.readingSummary = await readingSummaryResponse.json();
+		} else {
+			console.error('Failed to fetch reading summary:', readingSummaryResponse.status);
+			results.readingSummary = null;
+			results.readingSummaryError = `HTTP error! status: ${readingSummaryResponse.status}`;
+		}
+
 		return results;
 	} catch (error) {
 		console.error('Failed to fetch API data:', error);
@@ -62,6 +72,7 @@ export const load: ServerLoad = async ({ fetch }) => {
 			latestBook: null,
 			lastVisitedBook: null,
 			randomBooks: null,
+			readingSummary: null,
 			error: error instanceof Error ? error.message : 'Unknown error occurred',
 			fetchedAt
 		};
