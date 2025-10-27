@@ -38,7 +38,7 @@
 
 <Card class="overflow-hidden p-0">
 	<a href="/readings/summary" class="block">
-		<div class="aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900/20 dark:to-slate-800/20">
+		<div class="aspect-4/3 w-full overflow-hidden bg-linear-to-r from-slate-50 to-slate-100 dark:from-slate-900/20 dark:to-slate-800/20">
 			{#if !imageError}
 				<img
 					src="/images/reading.webp"

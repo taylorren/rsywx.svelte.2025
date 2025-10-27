@@ -31,18 +31,18 @@
 	<div class="mt-16">
 		<div class="mb-8 flex items-center justify-center">
 			<div class="flex flex-1 items-center justify-end">
-				<div class="h-1 w-16 rounded-full bg-gradient-to-r from-amber-400 to-amber-600"></div>
-				<div class="ml-2 h-0.5 flex-1 bg-gradient-to-r from-amber-600 to-transparent"></div>
+				<div class="h-1 w-16 rounded-full bg-linear-to-r from-amber-400 to-amber-600"></div>
+				<div class="ml-2 h-0.5 flex-1 bg-linear-to-r from-amber-600 to-transparent"></div>
 			</div>
 			<div class="mx-8 flex flex-col items-center">
 				<h2 class="mb-2 text-4xl font-bold text-gray-900 dark:text-white">藏书</h2>
 				<div
-					class="h-1 w-20 rounded-full bg-gradient-to-r from-amber-400 via-amber-600 to-amber-400"
+					class="h-1 w-20 rounded-full bg-linear-to-r from-amber-400 via-amber-600 to-amber-400"
 				></div>
 			</div>
 			<div class="flex flex-1 items-center justify-start">
-				<div class="mr-2 h-0.5 flex-1 bg-gradient-to-l from-amber-600 to-transparent"></div>
-				<div class="h-1 w-16 rounded-full bg-gradient-to-l from-amber-400 to-amber-600"></div>
+				<div class="mr-2 h-0.5 flex-1 bg-linear-to-l from-amber-600 to-transparent"></div>
+				<div class="h-1 w-16 rounded-full bg-linear-to-l from-amber-400 to-amber-600"></div>
 			</div>
 		</div>
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -78,18 +78,18 @@
 	<div class="mt-16">
 		<div class="mb-8 flex items-center justify-center">
 			<div class="flex flex-1 items-center justify-end">
-				<div class="h-1 w-16 rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600"></div>
-				<div class="ml-2 h-0.5 flex-1 bg-gradient-to-r from-emerald-600 to-transparent"></div>
+				<div class="h-1 w-16 rounded-full bg-linear-to-r from-emerald-400 to-emerald-600"></div>
+				<div class="ml-2 h-0.5 flex-1 bg-linear-to-r from-emerald-600 to-transparent"></div>
 			</div>
 			<div class="mx-8 flex flex-col items-center">
 				<h2 class="mb-2 text-4xl font-bold text-gray-900 dark:text-white">读书</h2>
 				<div
-					class="h-1 w-20 rounded-full bg-gradient-to-r from-emerald-400 via-emerald-600 to-emerald-400"
+					class="h-1 w-20 rounded-full bg-linear-to-r from-emerald-400 via-emerald-600 to-emerald-400"
 				></div>
 			</div>
 			<div class="flex flex-1 items-center justify-start">
-				<div class="mr-2 h-0.5 flex-1 bg-gradient-to-l from-emerald-600 to-transparent"></div>
-				<div class="h-1 w-16 rounded-full bg-gradient-to-l from-emerald-400 to-emerald-600"></div>
+				<div class="mr-2 h-0.5 flex-1 bg-linear-to-l from-emerald-600 to-transparent"></div>
+				<div class="h-1 w-16 rounded-full bg-linear-to-l from-emerald-400 to-emerald-600"></div>
 			</div>
 		</div>
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

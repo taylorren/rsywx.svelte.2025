@@ -61,7 +61,7 @@
 
 <Card class="overflow-hidden p-0">
 	<div
-		class="aspect-[4/3] w-full overflow-hidden bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-900/20 dark:to-slate-800/20"
+		class="aspect-4/3 w-full overflow-hidden bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-900/20 dark:to-slate-800/20"
 	>
 		{#if book?.bookid && !imageError}
 			<img
