@@ -2,7 +2,6 @@
 	import {
 		Card,
 		CardContent,
-		CardDescription,
 		CardHeader,
 		CardTitle
 	} from '$lib/components/ui/card';
@@ -14,9 +13,56 @@
 	import ReadingSummaryCard from '$lib/components/home/ReadingSummaryCard.svelte';
 	import LatestReadingCard from '$lib/components/home/LatestReadingCard.svelte';
 	import ReadingReviewsCard from '$lib/components/home/ReadingReviewsCard.svelte';
+	import WordOfTheDayCard from '$lib/components/home/WordOfTheDayCard.svelte';
+	import QuoteOfTheDayCard from '$lib/components/home/QuoteOfTheDayCard.svelte';
 	import type { PageData } from './$types';
+	import type { WordOfTheDayResponse, QuoteOfTheDayResponse } from '$lib/types/api';
 
 	let { data }: { data: PageData } = $props();
+
+	// WOTD state management
+	let wotdData = $state<WordOfTheDayResponse | null>((data as any).wotd);
+	let isRefreshingWotd = $state(false);
+
+	async function refreshWotd() {
+		if (isRefreshingWotd) return;
+		
+		isRefreshingWotd = true;
+		try {
+			const response = await fetch('/api/wotd');
+			if (response.ok) {
+				wotdData = await response.json();
+			} else {
+				console.error('Failed to refresh WOTD');
+			}
+		} catch (error) {
+			console.error('Error refreshing WOTD:', error);
+		} finally {
+			isRefreshingWotd = false;
+		}
+	}
+
+	// QOTD state management
+	let qotdData = $state<QuoteOfTheDayResponse | null>((data as any).qotd);
+	let isRefreshingQotd = $state(false);
+
+	async function refreshQotd() {
+		if (isRefreshingQotd) return;
+		
+		isRefreshingQotd = true;
+		try {
+			const response = await fetch('/api/qotd');
+			if (response.ok) {
+				qotdData = await response.json();
+			} else {
+				console.error('Failed to refresh QOTD');
+			}
+		} catch (error) {
+			console.error('Error refreshing QOTD:', error);
+		} finally {
+			isRefreshingQotd = false;
+		}
+	}
 </script>
 
 <!-- Main Content -->
@@ -135,54 +181,22 @@
 		</div>
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
 			<!-- Word of the Day Card -->
-			<Card class="overflow-hidden p-0">
-				<div class="aspect-4/3 w-full overflow-hidden bg-linear-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20">
-					<div class="flex h-full w-full animate-in items-center justify-center duration-500 fade-in-50">
-						<svg class="h-12 w-12 text-blue-300 dark:text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-						</svg>
-					</div>
-				</div>
-				<CardHeader class="px-4 pt-4 pb-1">
-					<CardTitle class="flex items-center gap-2 text-lg">
-						<svg class="h-5 w-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-						</svg>
-						每日单词
-					</CardTitle>
-				</CardHeader>
-				<CardContent class="space-y-2 px-4 pb-4">
-					<div class="text-center text-yellow-600 dark:text-yellow-400">
-						<span class="text-2xl">📚</span>
-						<p class="mt-1 text-sm">敬请期待</p>
-					</div>
-				</CardContent>
-			</Card>
+			<WordOfTheDayCard
+				wotd={wotdData}
+				error={(data as any).wotdError || data.error}
+				fetchedAt={data.fetchedAt}
+				onRefresh={refreshWotd}
+				isRefreshing={isRefreshingWotd}
+			/>
 
 			<!-- Quote of the Day Card -->
-			<Card class="overflow-hidden p-0">
-				<div class="aspect-4/3 w-full overflow-hidden bg-linear-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20">
-					<div class="flex h-full w-full animate-in items-center justify-center duration-500 fade-in-50">
-						<svg class="h-12 w-12 text-blue-300 dark:text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M14 17h3l2-4V7h-6v6h3M6 17h3l2-4V7H5v6h3"/>
-						</svg>
-					</div>
-				</div>
-				<CardHeader class="px-4 pt-4 pb-1">
-					<CardTitle class="flex items-center gap-2 text-lg">
-						<svg class="h-5 w-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M14 17h3l2-4V7h-6v6h3M6 17h3l2-4V7H5v6h3"/>
-						</svg>
-						每日名言
-					</CardTitle>
-				</CardHeader>
-				<CardContent class="space-y-2 px-4 pb-4">
-					<div class="text-center text-yellow-600 dark:text-yellow-400">
-						<span class="text-2xl">💭</span>
-						<p class="mt-1 text-sm">敬请期待</p>
-					</div>
-				</CardContent>
-			</Card>
+			<QuoteOfTheDayCard
+				qotd={qotdData}
+				error={(data as any).qotdError || data.error}
+				fetchedAt={data.fetchedAt}
+				onRefresh={refreshQotd}
+				isRefreshing={isRefreshingQotd}
+			/>
 		</div>
 	</div>
 </main>

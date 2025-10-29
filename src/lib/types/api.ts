@@ -71,8 +71,28 @@ export type ReadingsResponse = ApiResponse<Reading[]>;
 export type ReadingReviewsResponse = PaginatedApiResponse<Reading>;
 export type ReadingSummaryResponse = ApiResponse<ReadingSummary>;
 
+// Word of the Day Types
+export interface WordOfTheDay {
+	id: number;
+	word: string;
+	meaning: string;
+	sentence: string;
+	type: string;
+}
+
+// Quote of the Day Types
+export interface QuoteOfTheDay {
+	id: number;
+	quote: string;
+	source: string;
+}
+
 // Component Props Types
 export interface BaseCardProps {
 	error?: string;
 	fetchedAt: string;
 }
+
+// Additional API Response Types
+export type WordOfTheDayResponse = ApiResponse<WordOfTheDay>;
+export type QuoteOfTheDayResponse = ApiResponse<QuoteOfTheDay>;

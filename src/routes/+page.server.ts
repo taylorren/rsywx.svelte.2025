@@ -8,15 +8,17 @@ export const load: ServerLoad = async ({ fetch }) => {
 	};
 
 	try {
-		// Fetch books status, latest book, last visited book, random books, reading summary, latest reading, and reading reviews in parallel
-		const [statusResponse, latestResponse, lastVisitedResponse, randomResponse, readingSummaryResponse, latestReadingResponse, readingReviewsResponse] = await Promise.all([
+		// Fetch books status, latest book, last visited book, random books, reading summary, latest reading, reading reviews, WOTD, and QOTD in parallel
+		const [statusResponse, latestResponse, lastVisitedResponse, randomResponse, readingSummaryResponse, latestReadingResponse, readingReviewsResponse, wotdResponse, qotdResponse] = await Promise.all([
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/status`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/latest/1`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/last_visited/1`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/random/4`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/summary`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/latest/1`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/reviews/1`, { headers })
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/reviews/1`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/misc/wotd`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/misc/qotd`, { headers })
 		]);
 
 		const results: any = { fetchedAt };
@@ -84,6 +86,24 @@ export const load: ServerLoad = async ({ fetch }) => {
 			results.readingReviewsError = `HTTP error! status: ${readingReviewsResponse.status}`;
 		}
 
+		// Handle WOTD response
+		if (wotdResponse.ok) {
+			results.wotd = await wotdResponse.json();
+		} else {
+			console.error('Failed to fetch WOTD:', wotdResponse.status);
+			results.wotd = null;
+			results.wotdError = `HTTP error! status: ${wotdResponse.status}`;
+		}
+
+		// Handle QOTD response
+		if (qotdResponse.ok) {
+			results.qotd = await qotdResponse.json();
+		} else {
+			console.error('Failed to fetch QOTD:', qotdResponse.status);
+			results.qotd = null;
+			results.qotdError = `HTTP error! status: ${qotdResponse.status}`;
+		}
+
 		return results;
 	} catch (error) {
 		console.error('Failed to fetch API data:', error);
@@ -95,6 +115,8 @@ export const load: ServerLoad = async ({ fetch }) => {
 			readingSummary: null,
 			latestReading: null,
 			readingReviews: null,
+			wotd: null,
+			qotd: null,
 			error: error instanceof Error ? error.message : 'Unknown error occurred',
 			fetchedAt
 		};
