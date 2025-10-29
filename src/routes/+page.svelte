@@ -12,6 +12,8 @@
 	import LastVisitedCard from '$lib/components/home/LastVisitedCard.svelte';
 	import RandomBooksCard from '$lib/components/home/RandomBooksCard.svelte';
 	import ReadingSummaryCard from '$lib/components/home/ReadingSummaryCard.svelte';
+	import LatestReadingCard from '$lib/components/home/LatestReadingCard.svelte';
+	import ReadingReviewsCard from '$lib/components/home/ReadingReviewsCard.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -99,62 +101,86 @@
 				fetchedAt={data.fetchedAt}
 			/>
 
-			<!-- Card with Image -->
-			<Card class="overflow-hidden">
-				<div class="aspect-video w-full overflow-hidden">
-					<img
-						src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop&crop=center"
-						alt="Performance Analytics"
-						class="h-full w-full object-cover transition-transform hover:scale-105"
-					/>
+			<LatestReadingCard
+				latestReading={(data as any).latestReading}
+				error={(data as any).latestReadingError || data.error}
+				fetchedAt={data.fetchedAt}
+			/>
+
+			<ReadingReviewsCard
+				readingReviews={(data as any).readingReviews}
+				error={(data as any).readingReviewsError || data.error}
+				fetchedAt={data.fetchedAt}
+			/>
+		</div>
+	</div>
+
+	<!-- 杂项 Section -->
+	<div class="mt-16">
+		<div class="mb-8 flex items-center justify-center">
+			<div class="flex flex-1 items-center justify-end">
+				<div class="h-1 w-16 rounded-full bg-linear-to-r from-blue-400 to-blue-600"></div>
+				<div class="ml-2 h-0.5 flex-1 bg-linear-to-r from-blue-600 to-transparent"></div>
+			</div>
+			<div class="mx-8 flex flex-col items-center">
+				<h2 class="mb-2 text-4xl font-bold text-gray-900 dark:text-white">杂项</h2>
+				<div
+					class="h-1 w-20 rounded-full bg-linear-to-r from-blue-400 via-blue-600 to-blue-400"
+				></div>
+			</div>
+			<div class="flex flex-1 items-center justify-start">
+				<div class="mr-2 h-0.5 flex-1 bg-linear-to-l from-blue-600 to-transparent"></div>
+				<div class="h-1 w-16 rounded-full bg-linear-to-l from-blue-400 to-blue-600"></div>
+			</div>
+		</div>
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
+			<!-- Word of the Day Card -->
+			<Card class="overflow-hidden p-0">
+				<div class="aspect-4/3 w-full overflow-hidden bg-linear-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20">
+					<div class="flex h-full w-full animate-in items-center justify-center duration-500 fade-in-50">
+						<svg class="h-12 w-12 text-blue-300 dark:text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+						</svg>
+					</div>
 				</div>
-				<CardHeader>
-					<CardTitle>🚀 Performance</CardTitle>
-					<CardDescription>
-						Optimized builds with automatic code splitting and minimal runtime overhead
-					</CardDescription>
+				<CardHeader class="px-4 pt-4 pb-1">
+					<CardTitle class="flex items-center gap-2 text-lg">
+						<svg class="h-5 w-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+						</svg>
+						每日单词
+					</CardTitle>
 				</CardHeader>
-				<CardContent>
-					<p class="text-sm text-gray-600">
-						Ship fast, lightweight applications that provide excellent user experiences across all
-						devices.
-					</p>
+				<CardContent class="space-y-2 px-4 pb-4">
+					<div class="text-center text-yellow-600 dark:text-yellow-400">
+						<span class="text-2xl">📚</span>
+						<p class="mt-1 text-sm">敬请期待</p>
+					</div>
 				</CardContent>
 			</Card>
 
-			<Card>
-				<CardHeader>
-					<CardTitle>🎨 Modern UI</CardTitle>
-					<CardDescription>
-						Beautiful components with Tailwind CSS and shadcn-svelte integration
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<p class="text-sm text-gray-600">
-						Build stunning interfaces with pre-built components and utility-first CSS framework.
-					</p>
-				</CardContent>
-			</Card>
-
-			<!-- Card with Image -->
-			<Card class="overflow-hidden">
-				<div class="aspect-video w-full overflow-hidden">
-					<img
-						src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&crop=center"
-						alt="Flexible Deployment"
-						class="h-full w-full object-cover transition-transform hover:scale-105"
-					/>
+			<!-- Quote of the Day Card -->
+			<Card class="overflow-hidden p-0">
+				<div class="aspect-4/3 w-full overflow-hidden bg-linear-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20">
+					<div class="flex h-full w-full animate-in items-center justify-center duration-500 fade-in-50">
+						<svg class="h-12 w-12 text-blue-300 dark:text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M14 17h3l2-4V7h-6v6h3M6 17h3l2-4V7H5v6h3"/>
+						</svg>
+					</div>
 				</div>
-				<CardHeader>
-					<CardTitle>🔧 Flexible</CardTitle>
-					<CardDescription>
-						Deploy anywhere with multiple adapter options for different hosting platforms
-					</CardDescription>
+				<CardHeader class="px-4 pt-4 pb-1">
+					<CardTitle class="flex items-center gap-2 text-lg">
+						<svg class="h-5 w-5 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M14 17h3l2-4V7h-6v6h3M6 17h3l2-4V7H5v6h3"/>
+						</svg>
+						每日名言
+					</CardTitle>
 				</CardHeader>
-				<CardContent>
-					<p class="text-sm text-gray-600">
-						From static sites to serverless functions, deploy your app to any platform with ease.
-					</p>
+				<CardContent class="space-y-2 px-4 pb-4">
+					<div class="text-center text-yellow-600 dark:text-yellow-400">
+						<span class="text-2xl">💭</span>
+						<p class="mt-1 text-sm">敬请期待</p>
+					</div>
 				</CardContent>
 			</Card>
 		</div>

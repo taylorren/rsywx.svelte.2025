@@ -8,13 +8,15 @@ export const load: ServerLoad = async ({ fetch }) => {
 	};
 
 	try {
-		// Fetch books status, latest book, last visited book, random books, and reading summary in parallel
-		const [statusResponse, latestResponse, lastVisitedResponse, randomResponse, readingSummaryResponse] = await Promise.all([
+		// Fetch books status, latest book, last visited book, random books, reading summary, latest reading, and reading reviews in parallel
+		const [statusResponse, latestResponse, lastVisitedResponse, randomResponse, readingSummaryResponse, latestReadingResponse, readingReviewsResponse] = await Promise.all([
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/status`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/latest/1`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/last_visited/1`, { headers }),
 			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/random/4`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/summary`, { headers })
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/summary`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/latest/1`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/reviews/1`, { headers })
 		]);
 
 		const results: any = { fetchedAt };
@@ -64,6 +66,24 @@ export const load: ServerLoad = async ({ fetch }) => {
 			results.readingSummaryError = `HTTP error! status: ${readingSummaryResponse.status}`;
 		}
 
+		// Handle latest reading response
+		if (latestReadingResponse.ok) {
+			results.latestReading = await latestReadingResponse.json();
+		} else {
+			console.error('Failed to fetch latest reading:', latestReadingResponse.status);
+			results.latestReading = null;
+			results.latestReadingError = `HTTP error! status: ${latestReadingResponse.status}`;
+		}
+
+		// Handle reading reviews response
+		if (readingReviewsResponse.ok) {
+			results.readingReviews = await readingReviewsResponse.json();
+		} else {
+			console.error('Failed to fetch reading reviews:', readingReviewsResponse.status);
+			results.readingReviews = null;
+			results.readingReviewsError = `HTTP error! status: ${readingReviewsResponse.status}`;
+		}
+
 		return results;
 	} catch (error) {
 		console.error('Failed to fetch API data:', error);
@@ -73,6 +93,8 @@ export const load: ServerLoad = async ({ fetch }) => {
 			lastVisitedBook: null,
 			randomBooks: null,
 			readingSummary: null,
+			latestReading: null,
+			readingReviews: null,
 			error: error instanceof Error ? error.message : 'Unknown error occurred',
 			fetchedAt
 		};

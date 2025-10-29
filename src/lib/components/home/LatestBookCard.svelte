@@ -1,37 +1,10 @@
 <script lang="ts">
-	import {
-		Card,
-		CardContent,
-		CardDescription,
-		CardHeader,
-		CardTitle
-	} from '$lib/components/ui/card';
+	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
 	import { formatChineseDate } from '$lib/utils/dateFormatters';
+	import type { BooksResponse, BaseCardProps } from '$lib/types/api';
 
-	interface LatestBook {
-		success: boolean;
-		data?: Array<{
-			id: number;
-			bookid: string;
-			title: string;
-			author: string;
-			translated: boolean;
-			copyrighter?: string;
-			region: string;
-			location: string;
-			publisher_name: string;
-			place_name: string;
-			purchdate: string;
-			price: number;
-			cover_uri: string;
-		}>;
-		cached?: boolean;
-	}
-
-	interface Props {
-		latestBook: LatestBook | null;
-		error?: string;
-		fetchedAt: string;
+	interface Props extends BaseCardProps {
+		latestBook: BooksResponse | null;
 	}
 
 	let { latestBook, error, fetchedAt }: Props = $props();
@@ -96,7 +69,7 @@
 				viewBox="0 0 24 24"
 			>
 				<path
-					d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+					d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
 				/>
 			</svg>
 			最新收藏
