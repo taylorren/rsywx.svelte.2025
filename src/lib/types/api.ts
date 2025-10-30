@@ -33,6 +33,35 @@ export interface Book {
 	last_visited?: string;
 	visit_country?: string | null;
 	tags?: string[];
+	// 详细信息字段
+	intro?: string;
+	pubdate?: string;
+	printdate?: string;
+	isbn?: string;
+	page?: number;
+	kword?: number;
+	deco?: string;
+	ver?: number;
+	instock?: boolean;
+	category?: string;
+	// 书评相关
+	reviews?: BookReview[];
+}
+
+export interface BookReview {
+	id: number;
+	title: string;
+	content?: string;
+	rating?: number;
+	author?: string;
+	date: string;
+	datein: string;
+	source?: string;
+	uri: string;
+	feature: string;
+	bookid: string;
+	book_title: string;
+	cover_uri: string;
 }
 
 // Library Statistics

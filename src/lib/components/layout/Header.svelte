@@ -4,6 +4,7 @@
 
 	let mobileMenuOpen = $state(false);
 	let libraryDropdownOpen = $state(false);
+	let searchQuery = $state('');
 
 	onMount(() => {
 		document.addEventListener('click', handleClickOutside);
@@ -33,6 +34,19 @@
 		const target = event.target as Element;
 		if (!target.closest('.library-dropdown')) {
 			libraryDropdownOpen = false;
+		}
+	}
+
+	function handleSearch(event: Event) {
+		event.preventDefault();
+		if (searchQuery.trim()) {
+			window.location.href = `/books/list/misc/${encodeURIComponent(searchQuery.trim())}/1`;
+		}
+	}
+
+	function handleSearchKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			handleSearch(event);
 		}
 	}
 </script>
@@ -78,6 +92,14 @@
 								class="ring-opacity-5 absolute top-full left-0 z-50 mt-1 w-48 rounded-md bg-white shadow-lg ring-1 ring-black dark:bg-gray-800 dark:ring-gray-700"
 							>
 								<div class="py-1">
+									<a
+										href="/books/list"
+										onclick={closeLibraryDropdown}
+										class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+									>
+										📖 藏书总目
+									</a>
+									<div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
 									<a
 										href="/books/fiction"
 										onclick={closeLibraryDropdown}
@@ -168,6 +190,27 @@
 						>联系站长</a
 					>
 				</div>
+				
+				<!-- Search Box -->
+				<div class="flex items-center">
+					<form onsubmit={handleSearch} class="relative">
+						<div class="relative">
+							<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+								<svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+								</svg>
+							</div>
+							<input
+								type="text"
+								bind:value={searchQuery}
+								onkeydown={handleSearchKeydown}
+								placeholder="搜索书籍..."
+								class="block w-64 pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400"
+							/>
+						</div>
+					</form>
+				</div>
+				
 				<ThemeToggle />
 			</div>
 
@@ -212,6 +255,25 @@
 				class="border-t border-gray-200 bg-white md:hidden dark:border-gray-700 dark:bg-gray-900"
 			>
 				<div class="space-y-1 px-2 pt-2 pb-3">
+					<!-- Mobile Search Box -->
+					<div class="px-3 py-2">
+						<form onsubmit={handleSearch} class="relative">
+							<div class="relative">
+								<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+									<svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+									</svg>
+								</div>
+								<input
+									type="text"
+									bind:value={searchQuery}
+									onkeydown={handleSearchKeydown}
+									placeholder="搜索书籍..."
+									class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-400 dark:focus:border-blue-400"
+								/>
+							</div>
+						</form>
+					</div>
 					<a
 						href="/"
 						onclick={closeMobileMenu}
@@ -219,10 +281,10 @@
 						>首页</a
 					>
 					<a
-						href="/about"
+						href="/books/list"
 						onclick={closeMobileMenu}
 						class="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
-						>藏书</a
+						>藏书总目</a
 					>
 					<a
 						href="/readings"
