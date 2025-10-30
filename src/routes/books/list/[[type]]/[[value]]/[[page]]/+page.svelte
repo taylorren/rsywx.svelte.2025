@@ -208,6 +208,7 @@
 				</tbody>
 			</table>
 		</div>
+		</div>
 
 		<!-- Simple Pagination -->
 		{#if pagination.total_pages > 1}
