@@ -4,6 +4,7 @@
 
 	let mobileMenuOpen = $state(false);
 	let libraryDropdownOpen = $state(false);
+	let mobileLibraryDropdownOpen = $state(false);
 	let searchQuery = $state('');
 
 	onMount(() => {
@@ -19,6 +20,7 @@
 
 	function closeMobileMenu() {
 		mobileMenuOpen = false;
+		mobileLibraryDropdownOpen = false;
 	}
 
 	function toggleLibraryDropdown() {
@@ -27,6 +29,10 @@
 
 	function closeLibraryDropdown() {
 		libraryDropdownOpen = false;
+	}
+
+	function toggleMobileLibraryDropdown() {
+		mobileLibraryDropdownOpen = !mobileLibraryDropdownOpen;
 	}
 
 	// Close dropdown when clicking outside
@@ -99,41 +105,12 @@
 									>
 										📖 藏书总目
 									</a>
-									<div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
 									<a
-										href="/books/fiction"
+										href="/books/random"
 										onclick={closeLibraryDropdown}
 										class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
 									>
-										📚 小说文学
-									</a>
-									<a
-										href="/books/history"
-										onclick={closeLibraryDropdown}
-										class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-									>
-										📜 历史传记
-									</a>
-									<a
-										href="/books/philosophy"
-										onclick={closeLibraryDropdown}
-										class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-									>
-										🤔 哲学思想
-									</a>
-									<a
-										href="/books/science"
-										onclick={closeLibraryDropdown}
-										class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-									>
-										🔬 科学技术
-									</a>
-									<a
-										href="/books/economics"
-										onclick={closeLibraryDropdown}
-										class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-									>
-										💰 经济管理
+										🎲 手气不错
 									</a>
 								</div>
 							</div>
@@ -280,12 +257,40 @@
 						class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-700 dark:text-white dark:hover:bg-gray-800 dark:hover:text-gray-300"
 						>首页</a
 					>
-					<a
-						href="/books/list"
-						onclick={closeMobileMenu}
-						class="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
-						>藏书总目</a
-					>
+					<!-- 藏书 Section -->
+					<div class="py-1">
+						<button
+							onclick={toggleMobileLibraryDropdown}
+							class="flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-700 dark:text-white dark:hover:bg-gray-800 dark:hover:text-gray-300"
+						>
+							<span>藏书</span>
+							<svg
+								class="h-4 w-4 transition-transform {mobileLibraryDropdownOpen ? 'rotate-180' : ''}"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+							</svg>
+						</button>
+						{#if mobileLibraryDropdownOpen}
+							<div class="ml-4 space-y-1 mt-1">
+								<a
+									href="/books/list"
+									onclick={closeMobileMenu}
+									class="block rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+									>📖 藏书总目</a
+								>
+								<a
+									href="/books/random"
+									onclick={closeMobileMenu}
+									class="block rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+									>🎲 手气不错</a
+								>
+							</div>
+						{/if}
+					</div>
 					<a
 						href="/readings"
 						onclick={closeMobileMenu}
