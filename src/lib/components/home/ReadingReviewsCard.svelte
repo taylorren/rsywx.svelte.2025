@@ -14,7 +14,7 @@
 </script>
 
 <Card class="overflow-hidden p-0">
-	<a href="/readings/reviews" class="block">
+	<a href="/readings" class="block">
 		<div
 			class="aspect-4/3 w-full overflow-hidden bg-linear-to-r from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20"
 		>
@@ -109,14 +109,12 @@
 
 			{#if readingReviews?.pagination && readingReviews.pagination.total_results > 2}
 				<div class="pt-2 text-center">
-					<Button
-						variant="outline"
-						size="sm"
-						class="h-7 border-emerald-200 px-3 text-xs text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-900/20 dark:hover:text-emerald-300"
-						onclick={() => (window.location.href = '/readings/reviews')}
+					<a
+						href="/readings"
+						class="inline-flex h-7 items-center rounded-md border border-emerald-200 px-3 text-xs text-emerald-600 transition-colors hover:bg-emerald-50 hover:text-emerald-700 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-900/20 dark:hover:text-emerald-300"
 					>
 						查看全部 {readingReviews.pagination.total_results} 篇书评 →
-					</Button>
+					</a>
 				</div>
 			{/if}
 		{:else}
