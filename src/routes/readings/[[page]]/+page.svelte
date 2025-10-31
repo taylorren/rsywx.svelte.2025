@@ -8,22 +8,9 @@
 	const pagination = $derived(data.pagination);
 	const loading = $derived(data.loading || false);
 	const error = $derived(data.error || null);
-	
-	// Debug logging
-	$effect(() => {
-		console.log('Readings data:', { 
-			reviewsCount: reviews?.length, 
-			currentPage: pagination?.current_page,
-			totalPages: pagination?.total_pages,
-			error,
-			loading
-		});
-	});
 
 	function getPageUrl(newPage: number) {
-		const url = newPage === 1 ? `/readings` : `/readings/${newPage}`;
-		console.log(`getPageUrl(${newPage}) -> ${url}`);
-		return url;
+		return newPage === 1 ? `/readings` : `/readings/${newPage}`;
 	}
 
 	function formatDate(dateString: string) {

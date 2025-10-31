@@ -2,14 +2,11 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
 	const page = parseInt(params.page || '1');
-	console.log('Server load - params:', params, 'page:', page);
 	
 	try {
 		const apiUrl = `/api/v1/readings/reviews/${page}`;
-		console.log('Server load - fetching:', apiUrl);
 		const response = await fetch(apiUrl);
 		const data = await response.json();
-		console.log('Server load - response:', data);
 		
 		if (data.success) {
 			return {

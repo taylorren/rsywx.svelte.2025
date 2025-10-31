@@ -17,9 +17,8 @@
 			社交媒体
 		</h2>
 		
-		<!-- First Row: GitHub Profile and Commit History -->
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-			<!-- GitHub -->
+		<!-- First Row: GitHub Profile Link -->
+		<div class="mb-6">
 			<a 
 				href="https://github.com/taylorren" 
 				target="_blank" 
@@ -31,23 +30,24 @@
 				</svg>
 				<span class="font-semibold">&nbsp;&nbsp;GitHub</span>
 			</a>
-			
-			<!-- GitHub Commit History -->
+		</div>
+		
+		<!-- Second Row: GitHub Commit Chart -->
+		<div class="mb-6">
 			<div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-				<!-- GitHub Contribution Chart (Larger) -->
 				<div class="flex justify-center">
 					<img 
 						src="https://ghchart.rshah.org/taylorren" 
 						alt="GitHub 提交活动图"
 						class="max-w-full h-auto rounded-lg shadow-sm"
 						loading="lazy"
-						style="max-width: 100%; height: auto; min-height: 120px;"
+						style="max-width: 100%; height: auto;"
 					/>
 				</div>
 			</div>
 		</div>
 		
-		<!-- Second Row: X, Facebook, and Instagram -->
+		<!-- Third Row: X, Facebook, and Instagram -->
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 			<!-- X (formerly Twitter) -->
 			<a 
@@ -111,7 +111,7 @@
 					/>
 				</div>
 				<p class="text-gray-600 dark:text-gray-300">
-					扫码添加个人微信
+					个人微信
 				</p>
 			</div>
 
@@ -129,7 +129,7 @@
 					/>
 				</div>
 				<p class="text-gray-600 dark:text-gray-300">
-					关注我们的公众号
+					订阅号
 				</p>
 			</div>
 		</div>
