@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import BookListComponent from '$lib/components/BookListComponent.svelte';
 
 	// Navigation items for visit records
 	const navItems = [
 		{ id: 'recent-visits', label: '最近访问记录', icon: '🕒' },
-		{ id: 'popular-books', label: '热门书籍', icon: '�' }, 
+		{ id: 'popular-books', label: '热门书籍', icon: '🔥' }, 
 		{ id: 'unpopular-books', label: '冷门书籍', icon: '❄️' },
 		{ id: 'last-visited', label: '最近访问的书籍', icon: '👁️' },
 		{ id: 'forgotten-books', label: '被遗忘的书籍', icon: '💤' }
@@ -23,6 +24,42 @@
 		total_visits: number;
 	}
 
+	// Configuration for each book list section
+	const bookListConfigs = {
+		'popular-books': {
+			apiEndpoint: '/api/v1/books/popular/20',
+			badgeColor: 'blue' as const,
+			emptyMessage: '暂无热门书籍',
+			title: '热门书籍',
+			description: '按访问次数排序的热门书籍',
+			icon: '🔥'
+		},
+		'unpopular-books': {
+			apiEndpoint: '/api/v1/books/unpopular/20',
+			badgeColor: 'gray' as const,
+			emptyMessage: '暂无冷门书籍',
+			title: '冷门书籍',
+			description: '访问次数较少的冷门书籍',
+			icon: '❄️'
+		},
+		'last-visited': {
+			apiEndpoint: '/api/v1/books/last_visited/20',
+			badgeColor: 'green' as const,
+			emptyMessage: '暂无访问记录',
+			title: '最近访问的书籍',
+			description: '按最近访问时间排序的书籍',
+			icon: '👁️'
+		},
+		'forgotten-books': {
+			apiEndpoint: '/api/v1/books/forgotten/20',
+			badgeColor: 'red' as const,
+			emptyMessage: '暂无被遗忘的书籍',
+			title: '被遗忘的书籍',
+			description: '很久没有访问的书籍（超过90天）',
+			icon: '💤'
+		}
+	};
+
 	let activeTab = $state('recent-visits');
 	let visitHistory: VisitHistoryData[] = $state([]);
 	let periodInfo: PeriodInfo | null = $state(null);
@@ -35,6 +72,7 @@
 		if (tabId === 'recent-visits' && visitHistory.length === 0) {
 			fetchVisitHistory();
 		}
+		// The BookListComponent will auto-load when it becomes active
 	}
 
 	async function fetchVisitHistory() {
@@ -139,34 +177,14 @@
 		<!-- Right Content Panel -->
 		<div class="flex-1 min-w-0">
 			<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md">
-				<div class="p-6 border-b border-gray-200 dark:border-gray-700">
-					{#if activeTab === 'recent-visits'}
+				{#if activeTab === 'recent-visits'}
+					<div class="p-6 border-b border-gray-200 dark:border-gray-700">
 						<h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
 							🕒 最近访问记录
 						</h2>
 						<p class="text-sm text-gray-600 dark:text-gray-400 mt-1">显示最近的书籍访问记录</p>
-					{:else if activeTab === 'popular-books'}
-						<h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-							🔥 热门书籍
-						</h2>
-						<p class="text-sm text-gray-600 dark:text-gray-400 mt-1">按访问次数排序的热门书籍</p>
-					{:else if activeTab === 'unpopular-books'}
-						<h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-							❄️ 冷门书籍
-						</h2>
-						<p class="text-sm text-gray-600 dark:text-gray-400 mt-1">访问次数较少的冷门书籍</p>
-					{:else if activeTab === 'last-visited'}
-						<h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-							👁️ 最近访问的书籍
-						</h2>
-						<p class="text-sm text-gray-600 dark:text-gray-400 mt-1">按最近访问时间排序的书籍</p>
-					{:else if activeTab === 'forgotten-books'}
-						<h2 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-							💤 被遗忘的书籍
-						</h2>
-						<p class="text-sm text-gray-600 dark:text-gray-400 mt-1">很久没有访问的书籍</p>
-					{/if}
-				</div>
+					</div>
+				{/if}
 				
 				<div class="p-6">
 					{#if activeTab === 'recent-visits'}
@@ -308,6 +326,26 @@
 								</div>
 							{/if}
 						</div>
+					{:else if activeTab === 'popular-books'}
+						<BookListComponent 
+							config={bookListConfigs['popular-books']} 
+							autoLoad={true}
+						/>
+					{:else if activeTab === 'unpopular-books'}
+						<BookListComponent 
+							config={bookListConfigs['unpopular-books']} 
+							autoLoad={true}
+						/>
+					{:else if activeTab === 'last-visited'}
+						<BookListComponent 
+							config={bookListConfigs['last-visited']} 
+							autoLoad={true}
+						/>
+					{:else if activeTab === 'forgotten-books'}
+						<BookListComponent 
+							config={bookListConfigs['forgotten-books']} 
+							autoLoad={true}
+						/>
 					{:else}
 						<!-- Other tabs placeholder -->
 						<div class="text-center py-12">
