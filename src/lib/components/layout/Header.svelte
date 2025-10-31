@@ -119,6 +119,14 @@
 									>
 										📅 今日往昔
 									</a>
+									<div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
+									<a
+										href="/books/visits"
+										onclick={closeLibraryDropdown}
+										class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+									>
+										📊 访问记录
+									</a>
 								</div>
 							</div>
 						{/if}
@@ -300,6 +308,13 @@
 									onclick={closeMobileMenu}
 									class="block rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
 									>📅 今日往昔</a
+								>
+								<div class="border-t border-gray-200 dark:border-gray-600 my-2 mx-3"></div>
+								<a
+									href="/books/visits"
+									onclick={closeMobileMenu}
+									class="block rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+									>📊 访问记录</a
 								>
 							</div>
 						{/if}
