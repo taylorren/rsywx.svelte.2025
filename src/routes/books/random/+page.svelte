@@ -1,20 +1,23 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import type { Book } from '$lib/types/api';
 
-	let books: Book[] = $state([]);
-	let loading = $state(true);
-	let error = $state('');
+	// Server-provided data (SSR)
+	const { data } = $props<{ data: { books: Book[]; error: string | null } }>();
+
+	// Use the project's $state helper for consistency with the codebase
+	let books: Book[] = $state(data?.books ?? []);
+	let loading = $state(false);
+	let error = $state(data?.error ?? '');
 
 	async function fetchRandomBooks(refresh = false) {
 		loading = true;
 		error = '';
-		
+
 		try {
 			const url = `/api/v1/books/random/9${refresh ? '?refresh=true' : ''}`;
 			const response = await fetch(url);
 			const result = await response.json();
-			
+
 			if (result.success) {
 				books = result.data;
 			} else {
@@ -31,10 +34,6 @@
 	function handleRefresh() {
 		fetchRandomBooks(true);
 	}
-
-	onMount(() => {
-		fetchRandomBooks();
-	});
 </script>
 
 <svelte:head>

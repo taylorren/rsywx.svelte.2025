@@ -26,14 +26,17 @@
 	// Props
 	let { 
 		config,
-		autoLoad = false 
+		autoLoad = false,
+		initialItems = []
 	}: { 
 		config: BookListConfig;
 		autoLoad?: boolean;
+		// allow either server Book[] or local BookListItem[] shapes
+		initialItems?: any[];
 	} = $props();
 
-	// State
-	let books: BookListItem[] = $state([]);
+	// State (initialize from server-provided initialItems when present)
+	let books: BookListItem[] = $state(initialItems ?? []);
 	let loading = $state(false);
 	let error = $state('');
 
@@ -85,7 +88,10 @@
 	}
 
 	onMount(() => {
-		if (autoLoad) {
+		// If consumer asked for autoLoad, only perform it when there are no initialItems
+		// This allows pages to SSR the list by passing `initialItems` while keeping
+		// the component usable in client-only contexts (autoLoad = true).
+		if (autoLoad && (!initialItems || initialItems.length === 0)) {
 			loadBooks();
 		}
 	});

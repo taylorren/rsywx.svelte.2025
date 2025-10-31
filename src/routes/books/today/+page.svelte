@@ -12,19 +12,24 @@
 		is_today: boolean;
 	}
 
-	let books: TodayBook[] = $state([]);
-	let dateInfo: DateInfo | null = $state(null);
-	let loading = $state(true);
-	let error = $state('');
+	// read server-provided data via $props() so this file works in runes mode
+	const _props = $props();
+	const _data = (_props && _props.data) || {};
+
+	let books: TodayBook[] = $state(_data.books ?? []);
+	let dateInfo: DateInfo | null = $state(_data.dateInfo ?? null);
+	let loading = $state(false);
+	let error = $state(_data.error ?? '');
 
 	async function fetchTodayBooks() {
+		// client-side fallback in case server data was not provided
 		loading = true;
 		error = '';
-		
+    
 		try {
 			const response = await fetch('/api/v1/books/today');
 			const result = await response.json();
-			
+        
 			if (result.success) {
 				books = result.data || [];
 				dateInfo = result.date_info || null;
@@ -38,7 +43,6 @@
 			loading = false;
 		}
 	}
-
 	function formatDate(dateStr: string) {
 		const date = new Date(dateStr);
 		return date.toLocaleDateString('zh-CN', {
@@ -48,8 +52,11 @@
 		});
 	}
 
+	// If server didn't provide data, fetch on mount
 	onMount(() => {
-		fetchTodayBooks();
+		if ((!books || books.length === 0) && !error) {
+			fetchTodayBooks();
+		}
 	});
 </script>
 

@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import BookListComponent from '$lib/components/BookListComponent.svelte';
+	import type { Book } from '$lib/types/api';
+
+	// server-provided data (SSR)
+	// use $props() in runes/compiled mode instead of `export let`
+	const _props = $props();
+	const data = (_props && _props.data) || {};
 
 	// Navigation items for visit records
 	const navItems = [
@@ -61,17 +67,17 @@
 	};
 
 	let activeTab = $state('recent-visits');
-	let visitHistory: VisitHistoryData[] = $state([]);
-	let periodInfo: PeriodInfo | null = $state(null);
+	let visitHistory: VisitHistoryData[] = $state(data.visitHistory ?? []);
+	let periodInfo: PeriodInfo | null = $state(data.periodInfo ?? null);
 	let loading = $state(false);
-	let error = $state('');
+	let error = $state(data.error ?? '');
 	let selectedDays = $state(30);
 
 	function setActiveTab(tabId: string) {
 		activeTab = tabId;
-		if (tabId === 'recent-visits' && visitHistory.length === 0) {
-			fetchVisitHistory();
-		}
+		if (tabId === 'recent-visits' && (!visitHistory || visitHistory.length === 0)) {
+				fetchVisitHistory();
+			}
 		// The BookListComponent will auto-load when it becomes active
 	}
 
@@ -133,8 +139,9 @@
 		return num.toLocaleString('zh-CN');
 	}
 
+	// If we didn't get visitHistory from the server, fetch on mount (fallback)
 	onMount(() => {
-		if (activeTab === 'recent-visits') {
+		if ((!visitHistory || visitHistory.length === 0) && activeTab === 'recent-visits') {
 			fetchVisitHistory();
 		}
 	});
@@ -330,21 +337,25 @@
 						<BookListComponent 
 							config={bookListConfigs['popular-books']} 
 							autoLoad={true}
+							initialItems={data.popularBooks ?? []}
 						/>
 					{:else if activeTab === 'unpopular-books'}
 						<BookListComponent 
 							config={bookListConfigs['unpopular-books']} 
 							autoLoad={true}
+							initialItems={data.unpopularBooks ?? []}
 						/>
 					{:else if activeTab === 'last-visited'}
 						<BookListComponent 
 							config={bookListConfigs['last-visited']} 
 							autoLoad={true}
+							initialItems={data.lastVisitedBooks ?? []}
 						/>
 					{:else if activeTab === 'forgotten-books'}
 						<BookListComponent 
 							config={bookListConfigs['forgotten-books']} 
 							autoLoad={true}
+							initialItems={data.forgottenBooks ?? []}
 						/>
 					{:else}
 						<!-- Other tabs placeholder -->

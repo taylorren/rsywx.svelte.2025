@@ -1,6 +1,10 @@
 <script lang="ts">
 	import BookListComponent from '$lib/components/BookListComponent.svelte';
 
+	import type { Book } from '$lib/types/api';
+
+	export let data: { books?: Book[]; error?: string | null } = {};
+
 	const config = {
 		apiEndpoint: '/api/v1/books/popular/20',
 		badgeColor: 'blue' as const,
@@ -23,6 +27,6 @@
 	</div>
 
 	<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md">
-		<BookListComponent {config} autoLoad={true} />
+	<BookListComponent {config} initialItems={data?.books ?? []} />
 	</div>
 </div>
