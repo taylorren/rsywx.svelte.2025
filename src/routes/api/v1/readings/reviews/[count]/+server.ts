@@ -16,7 +16,7 @@ export const GET: RequestHandler = async ({ params, url, fetch }) => {
 		if (refresh) queryParams.set('refresh', 'true');
 		
 		const queryString = queryParams.toString();
-		const apiUrl = `${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/reviews/${page}${queryString ? '?' + queryString : ''}`;
+		const apiUrl = `${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/readings/reviews/${page}${queryString ? '?' + queryString : ''}`;
 		
 		const response = await fetch(apiUrl, { headers });
 

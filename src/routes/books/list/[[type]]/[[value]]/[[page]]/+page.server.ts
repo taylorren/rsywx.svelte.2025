@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ params, url, fetch }) => {
 
         // Build API URL: /books/list/type/value/page
         // Pass exact parameters to API (including '-' for empty search)
-        let apiUrl = `${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/list/${searchType}/${encodeURIComponent(searchValue)}/${page}`;
+        let apiUrl = `${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/list/${searchType}/${encodeURIComponent(searchValue)}/${page}`;
 
         // Add query parameters
         if (refresh) {

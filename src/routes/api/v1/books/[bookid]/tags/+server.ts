@@ -33,7 +33,7 @@ export const POST: RequestHandler = async ({ params, request, fetch }) => {
 			'X-API-Key': RSYWX_API_KEY || 'your_api_key_here'
 		};
 
-		const apiUrl = `${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/${bookid}/tags`;
+		const apiUrl = `${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/${bookid}/tags`;
 		
 		const response = await fetch(apiUrl, {
 			method: 'POST',

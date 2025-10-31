@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 	};
 
 	try {
-		const apiUrl = `${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/random/4${refresh ? '?refresh=true' : ''}`;
+		const apiUrl = `${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/random/4${refresh ? '?refresh=true' : ''}`;
 		const response = await fetch(apiUrl, { headers });
 
 		if (response.ok) {

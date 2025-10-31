@@ -10,15 +10,15 @@ export const load: ServerLoad = async ({ fetch }) => {
 	try {
 		// Fetch books status, latest book, last visited book, random books, reading summary, latest reading, reading reviews, WOTD, and QOTD in parallel
 		const [statusResponse, latestResponse, lastVisitedResponse, randomResponse, readingSummaryResponse, latestReadingResponse, readingReviewsResponse, wotdResponse, qotdResponse] = await Promise.all([
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/status`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/latest/1`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/last_visited/1`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/random/4`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/summary`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/latest/1`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/readings/reviews/1`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/misc/wotd`, { headers }),
-			fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/misc/qotd`, { headers })
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/status`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/latest/1`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/last_visited/1`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/random/4`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/readings/summary`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/readings/latest/1`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/readings/reviews/1`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/misc/wotd`, { headers }),
+			fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/misc/qotd`, { headers })
 		]);
 
 		const results: any = { fetchedAt };

@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 
 	try {
 		const response = await fetch(
-			`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/${bookid}`,
+			`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/${bookid}`,
 			{ headers }
 		);
 

@@ -30,7 +30,7 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 			queryParams.set('refresh', 'true');
 		}
 
-		const apiUrl = `${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/visit_history?${queryParams}`;
+		const apiUrl = `${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/visit_history?${queryParams}`;
 		
 		const response = await fetch(apiUrl, { headers });
 

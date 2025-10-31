@@ -8,7 +8,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 	};
 
 	try {
-		const response = await fetch(`${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/misc/wotd`, { 
+		const response = await fetch(`${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/misc/wotd`, { 
 			headers 
 		});
 

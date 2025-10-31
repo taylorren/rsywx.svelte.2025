@@ -11,7 +11,7 @@ export const GET: RequestHandler = async ({ url, fetch }) => {
 			'X-API-Key': RSYWX_API_KEY || 'your_api_key_here'
 		};
 
-		const apiUrl = `${RSYWX_API_BASE_URL || 'http://api.rsywx/api/v1'}/books/today${refresh ? '?refresh=true' : ''}`;
+		const apiUrl = `${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/books/today${refresh ? '?refresh=true' : ''}`;
 		
 		const response = await fetch(apiUrl, { headers });
 

@@ -46,7 +46,7 @@ Create `.env.production` in project root:
 
 ```env
 RSYWX_API_KEY=your_production_api_key_here
-RSYWX_API_BASE_URL=http://api.rsywx/api/v1
+RSYWX_API_BASE_URL=https://api.rsywx.com/api/v1
 ```
 
 **Important:** Add `.env.production` to `.gitignore` if it contains sensitive data.
@@ -133,7 +133,7 @@ Create or edit `/var/www/rsywx/.env`:
 
 ```env
 RSYWX_API_KEY=your_production_api_key
-RSYWX_API_BASE_URL=http://api.rsywx/api/v1
+RSYWX_API_BASE_URL=https://api.rsywx.com/api/v1
 PORT=3000
 HOST=127.0.0.1
 ORIGIN=https://yourdomain.com
@@ -389,7 +389,7 @@ cat /var/www/rsywx/.env
 
 Verify API endpoint is accessible from server:
 ```bash
-curl -H "X-API-Key: your_key" http://api.rsywx/api/v1/books/status
+curl -H "X-API-Key: your_key" https://api.rsywx.com/api/v1/books/status
 ```
 
 ## Performance Optimization
