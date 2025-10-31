@@ -3,16 +3,11 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params, url, fetch }) => {
-    console.log('=== SERVER LOAD FUNCTION CALLED ===');
-    console.log('Params:', params);
-
     // Extract parameters with defaults (keep exact values, apply defaults only when missing)
     const searchType = params.type || 'title';
     const searchValue = params.value || '-';  // Keep '-' as is, don't convert to empty string
     const page = parseInt(params.page || '1') || 1;
     const refresh = url.searchParams.get('refresh') === 'true';
-
-    console.log('Parsed params:', { searchType, searchValue, page });
 
     try {
         const headers = {
@@ -28,18 +23,10 @@ export const load: PageServerLoad = async ({ params, url, fetch }) => {
             apiUrl += '?refresh=true';
         }
 
-        console.log('API URL:', apiUrl);
-
         const response = await fetch(apiUrl, { headers });
 
         if (response.ok) {
             const data = await response.json();
-            console.log('API Response:', { 
-                success: data.success, 
-                booksCount: data.data?.length, 
-                pagination: data.pagination,
-                cached: data.cached 
-            });
             if (data.success) {
                 const result = {
                     books: data.data || [],
@@ -53,19 +40,12 @@ export const load: PageServerLoad = async ({ params, url, fetch }) => {
                     searchValue: searchValue === '-' ? '' : searchValue,  // Convert '-' to empty string only for display
                     cached: data.cached || false
                 };
-                console.log('Returning data:', { 
-                    booksCount: result.books.length, 
-                    currentPage: result.pagination.current_page,
-                    firstBookId: result.books[0]?.bookid 
-                });
                 return result;
             }
         }
 
-        console.error('Failed to load books:', response.status);
         throw error(response.status, 'Failed to load books');
     } catch (err) {
-        console.error('Error loading books:', err);
         throw error(500, `Internal server error: ${err instanceof Error ? err.message : 'Unknown error'}`);
     }
 };
