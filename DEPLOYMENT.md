@@ -16,7 +16,7 @@ This guide covers deploying the rsywx SvelteKit application to a production Apac
 
 ```bash
 cd D:\rsywx
-npm install -D @sveltejs/adapter-node
+pnpm add -D @sveltejs/adapter-node
 ```
 
 ### 1.2 Update svelte.config.js
@@ -54,7 +54,7 @@ RSYWX_API_BASE_URL=http://api.rsywx/api/v1
 ### 1.4 Build the Project
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 This generates the `build/` directory with your production app.
@@ -119,12 +119,12 @@ npm run build
 
 ```bash
 cd /var/www/rsywx
-npm ci --production
+pnpm install --prod
 ```
 
-Or if using pnpm:
+Or if using npm:
 ```bash
-pnpm install --prod
+npm ci --production
 ```
 
 ### 4.2 Set Environment Variables
@@ -341,7 +341,7 @@ pm2 delete rsywx        # Remove from PM2
 
 ```bash
 cd /var/www/rsywx
-npm update
+pnpm update
 pm2 restart rsywx
 ```
 
