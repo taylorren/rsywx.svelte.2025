@@ -230,5 +230,5 @@ common/autoinstallers/*/.npmrc
 
 # Stores
 .nx/cache
-# WebP images
-*.webp
+# Book cover images
+/static/covers/*.jpg

@@ -37,7 +37,7 @@
 	>
 		{#if book?.bookid && !imageError}
 			<img
-				src="/covers/{book.bookid}.webp"
+				src="/covers/{book.bookid}.jpg"
 				alt={book.title}
 				class="h-full w-full object-cover transition-all duration-1800 hover:scale-105 {imageLoaded
 					? 'translate-y-0 opacity-100'

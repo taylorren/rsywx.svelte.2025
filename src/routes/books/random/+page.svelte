@@ -100,7 +100,7 @@
 					<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
 						<div class="aspect-4/3 overflow-hidden">
 							<img
-								src="/covers/{book.bookid}.webp"
+								src="/covers/{book.bookid}.jpg"
 								alt={book.title}
 								class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
 								loading="lazy"

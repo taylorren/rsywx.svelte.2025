@@ -187,7 +187,7 @@
 							<div class="shrink-0">
 								<div class="w-12 h-16 overflow-hidden rounded shadow-sm">
 									<img
-										src="/covers/{book.bookid}.webp"
+										src="/covers/{book.bookid}.jpg"
 										alt={book.title}
 										class="w-full h-full object-contain"
 										loading="lazy"

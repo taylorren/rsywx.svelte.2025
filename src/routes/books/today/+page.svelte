@@ -136,7 +136,7 @@
 						<div class="shrink-0">
 							<div class="w-16 h-20 overflow-hidden rounded shadow-sm">
 								<img
-									src="/covers/{book.bookid}.webp"
+									src="/covers/{book.bookid}.jpg"
 									alt={book.title}
 									class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
 									loading="lazy"

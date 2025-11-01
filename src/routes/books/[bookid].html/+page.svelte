@@ -144,7 +144,7 @@
 	bookAuthor={book.author}
 	isbn={book.isbn}
 	tags={currentTags}
-	image={`/covers/${book.bookid}.webp`}
+	image={`/covers/${book.bookid}.jpg`}
 	imageAlt={`${book.title} - ${book.author}`}
 />
 
@@ -179,7 +179,7 @@
 				>
 					{#if !imageError}
 						<img
-							src="/covers/{book.bookid}.webp"
+							src="/covers/{book.bookid}.jpg"
 							alt={book.title}
 							class="h-full w-full object-cover transition-all duration-500 {imageLoaded
 								? 'translate-y-0 opacity-100'
@@ -224,7 +224,7 @@
 										<!-- Feature Image -->
 										<div class="mb-4 overflow-hidden rounded-lg">
 											<img
-												src={review.feature || `/covers/${book.bookid}.webp`}
+												src={review.feature || `/covers/${book.bookid}.jpg`}
 												alt={review.title}
 												class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
 												loading="lazy"

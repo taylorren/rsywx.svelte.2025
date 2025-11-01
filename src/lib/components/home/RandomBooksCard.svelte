@@ -142,7 +142,7 @@
 						>
 							{#if !imageStates[book.bookid]?.error}
 								<img
-									src="/covers/{book.bookid}.webp"
+									src="/covers/{book.bookid}.jpg"
 									alt={book.title}
 									class="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 {imageStates[
 										book.bookid

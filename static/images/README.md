@@ -15,7 +15,7 @@ This image will be used when your site is shared on social media platforms like 
 ## Book Covers
 
 Book cover images should be placed in the `/covers/` directory with the naming pattern:
-- `{bookid}.webp` - for individual book covers
+- `{bookid}.jpg` - for individual book covers
 
 ## Other Images
 
