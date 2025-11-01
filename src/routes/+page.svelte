@@ -15,6 +15,7 @@
 	import ReadingReviewsCard from '$lib/components/home/ReadingReviewsCard.svelte';
 	import WordOfTheDayCard from '$lib/components/home/WordOfTheDayCard.svelte';
 	import QuoteOfTheDayCard from '$lib/components/home/QuoteOfTheDayCard.svelte';
+	import WordPressBlogCard from '$lib/components/home/WordPressBlogCard.svelte';
 	import SEO from '$lib/components/SEO.svelte';
 	import type { PageData } from './$types';
 	import type { WordOfTheDayResponse, QuoteOfTheDayResponse } from '$lib/types/api';
@@ -164,6 +165,33 @@
 			<ReadingReviewsCard
 				readingReviews={(data as any).readingReviews}
 				error={(data as any).readingReviewsError || data.error}
+				fetchedAt={data.fetchedAt}
+			/>
+		</div>
+	</div>
+
+	<!-- 博客 Section -->
+	<div class="mt-16">
+		<div class="mb-8 flex items-center justify-center">
+			<div class="flex flex-1 items-center justify-end">
+				<div class="h-1 w-16 rounded-full bg-linear-to-r from-purple-400 to-purple-600"></div>
+				<div class="ml-2 h-0.5 flex-1 bg-linear-to-r from-purple-600 to-transparent"></div>
+			</div>
+			<div class="mx-8 flex flex-col items-center">
+				<h2 class="mb-2 text-4xl font-bold text-gray-900 dark:text-white">博客</h2>
+				<div
+					class="h-1 w-20 rounded-full bg-linear-to-r from-purple-400 via-purple-600 to-purple-400"
+				></div>
+			</div>
+			<div class="flex flex-1 items-center justify-start">
+				<div class="mr-2 h-0.5 flex-1 bg-linear-to-l from-purple-600 to-transparent"></div>
+				<div class="h-1 w-16 rounded-full bg-linear-to-l from-purple-400 to-purple-600"></div>
+			</div>
+		</div>
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-1 lg:grid-cols-1">
+			<WordPressBlogCard
+				initialPosts={(data as any).wpPosts}
+				error={(data as any).wpPostsError || data.error}
 				fetchedAt={data.fetchedAt}
 			/>
 		</div>

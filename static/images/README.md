@@ -22,3 +22,4 @@ Book cover images should be placed in the `/covers/` directory with the naming p
 - `favicon.ico` - Site favicon
 - `wechat_account.jpg` - WeChat personal QR code  
 - `wechat_talk.jpg` - WeChat subscription QR code
+- `tr.webp` - Fallback image for WordPress blog posts (400x200px, WebP format)

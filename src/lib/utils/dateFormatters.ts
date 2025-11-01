@@ -29,3 +29,36 @@ export function formatRelativeTime(dateString: string): string {
     if (diffDays < 365) return `${Math.floor(diffDays / 30)}个月前`;
     return `${Math.floor(diffDays / 365)}年前`;
 }
+
+/**
+ * Converts English date strings like "November 1" to Chinese format "11月1日"
+ * @param dateStr - English date string (e.g., "November 1", "January 15")
+ * @returns Chinese formatted date string
+ */
+export function convertEnglishDateToChinese(dateStr: string): string {
+    const monthMap: { [key: string]: number } = {
+        'January': 1,
+        'February': 2,
+        'March': 3,
+        'April': 4,
+        'May': 5,
+        'June': 6,
+        'July': 7,
+        'August': 8,
+        'September': 9,
+        'October': 10,
+        'November': 11,
+        'December': 12
+    };
+
+    // Pattern to match "Month Day" format
+    const monthDayPattern = /(\w+)\s+(\d+)/g;
+    
+    return dateStr.replace(monthDayPattern, (match, monthName, day) => {
+        const monthNumber = monthMap[monthName];
+        if (monthNumber) {
+            return `${monthNumber}月${day}日`;
+        }
+        return match; // Return original if month not found
+    });
+}
