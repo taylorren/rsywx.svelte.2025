@@ -2,6 +2,7 @@
 	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
 	import { formatChineseDate, formatRelativeTime } from '$lib/utils/dateFormatters';
 	import { invalidateAll } from '$app/navigation';
+	import SEO from '$lib/components/SEO.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -134,10 +135,18 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{book.title} - {book.author} | 任氏有无轩</title>
-	<meta name="description" content={book.intro || `${book.title} by ${book.author}`} />
-</svelte:head>
+<SEO 
+	title={`${book.title} - ${book.author}`}
+	description={book.intro || `${book.title} 作者：${book.author}，出版社：${book.publisher_name}。任氏有无轩藏书详情页面。`}
+	keywords={`${book.title},${book.author},${book.publisher_name},${currentTags.join(',')},图书,藏书`}
+	type="book"
+	bookTitle={book.title}
+	bookAuthor={book.author}
+	isbn={book.isbn}
+	tags={currentTags}
+	image={`/covers/${book.bookid}.webp`}
+	imageAlt={`${book.title} - ${book.author}`}
+/>
 
 <style>
 	.line-clamp-3 {

@@ -15,6 +15,7 @@
 	import ReadingReviewsCard from '$lib/components/home/ReadingReviewsCard.svelte';
 	import WordOfTheDayCard from '$lib/components/home/WordOfTheDayCard.svelte';
 	import QuoteOfTheDayCard from '$lib/components/home/QuoteOfTheDayCard.svelte';
+	import SEO from '$lib/components/SEO.svelte';
 	import type { PageData } from './$types';
 	import type { WordOfTheDayResponse, QuoteOfTheDayResponse } from '$lib/types/api';
 
@@ -64,6 +65,13 @@
 		}
 	}
 </script>
+
+<SEO 
+	title="首页"
+	description="任氏有无轩 - 个人数字图书馆，收录丰富的藏书资源、读书笔记、博客文章和学习资料。探索知识的海洋，分享阅读的乐趣。"
+	keywords="任氏有无轩,个人图书馆,数字图书馆,藏书,读书笔记,博客,学习资料,知识分享,阅读"
+	type="website"
+/>
 
 <!-- Main Content -->
 <main class="mx-auto max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8">

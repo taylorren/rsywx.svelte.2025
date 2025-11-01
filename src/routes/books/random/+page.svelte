@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SEO from '$lib/components/SEO.svelte';
 	import type { Book } from '$lib/types/api';
 
 	// Server-provided data (SSR)
@@ -36,10 +37,12 @@
 	}
 </script>
 
-<svelte:head>
-	<title>手气不错 | 任氏有无轩</title>
-	<meta name="description" content="随机浏览任氏有无轩的藏书" />
-</svelte:head>
+<SEO 
+	title="手气不错"
+	description="任氏有无轩随机书籍推荐，发现藏书中的精彩内容。每次刷新都有不同的惊喜，探索未知的阅读世界。"
+	keywords="随机书籍,书籍推荐,发现好书,藏书探索,任氏有无轩"
+	type="website"
+/>
 
 <div class="container mx-auto px-4 py-8">
 	<div class="mb-8 text-center">

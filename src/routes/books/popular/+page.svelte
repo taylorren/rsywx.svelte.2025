@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BookListComponent from '$lib/components/BookListComponent.svelte';
-
+	import SEO from '$lib/components/SEO.svelte';
 	import type { Book } from '$lib/types/api';
 
 	export let data: { books?: Book[]; error?: string | null } = {};
@@ -15,10 +15,12 @@
 	};
 </script>
 
-<svelte:head>
-	<title>热门书籍 | 任氏有无轩</title>
-	<meta name="description" content="按访问次数排序的热门书籍" />
-</svelte:head>
+<SEO 
+	title="热门书籍"
+	description="任氏有无轩热门书籍列表，按访问次数排序展示最受欢迎的藏书。发现读者最喜爱的经典好书。"
+	keywords="热门书籍,受欢迎图书,经典好书,藏书推荐,图书排行榜"
+	type="website"
+/>
 
 <div class="container mx-auto px-4 py-8">
 	<div class="mb-8 text-center">

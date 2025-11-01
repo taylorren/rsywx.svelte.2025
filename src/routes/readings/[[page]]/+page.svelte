@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SEO from '$lib/components/SEO.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -30,10 +31,16 @@
 	}
 </script>
 
-<svelte:head>
-	<title>读书笔记{pagination.current_page > 1 ? ` - 第${pagination.current_page}页` : ''} - 任氏有无轩</title>
-	<meta name="description" content="阅读心得与书评分享" />
-</svelte:head>
+<SEO 
+	title={`读书笔记${pagination.current_page > 1 ? ` - 第${pagination.current_page}页` : ''}`}
+	description={`任氏有无轩读书笔记分享，阅读心得与书评。共收录 ${pagination.total_results || 0} 篇读书笔记，分享阅读感悟和思考。`}
+	keywords="读书笔记,书评,阅读心得,读后感,文学评论,阅读分享"
+	type="website"
+/>
+
+{#if pagination.current_page > 1}
+	<SEO canonical={`/readings/${pagination.current_page}`} />
+{/if}
 
 <div class="container mx-auto px-4 py-8 max-w-6xl">
 	<div class="text-center mb-8">

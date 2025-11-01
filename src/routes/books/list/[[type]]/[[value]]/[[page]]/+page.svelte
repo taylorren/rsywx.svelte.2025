@@ -1,5 +1,5 @@
 <script lang="ts">
-
+	import SEO from '$lib/components/SEO.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -44,12 +44,43 @@
 		}
 		return '藏书总目';
 	}
+
+	function getSearchDescription() {
+		const totalBooks = pagination.total_results || 0;
+		const currentPage = pagination.current_page || 1;
+		
+		if (searchType === 'author' && searchValue) {
+			return `任氏有无轩收录的${searchValue}作品集，共${totalBooks}本书籍。浏览该作者的所有藏书。`;
+		} else if (searchType === 'title' && searchValue) {
+			return `任氏有无轩书名搜索结果：${searchValue}，共找到${totalBooks}本相关书籍。`;
+		} else if (searchType === 'tags' && searchValue) {
+			return `任氏有无轩标签"${searchValue}"相关书籍，共${totalBooks}本。按标签分类浏览藏书。`;
+		} else if (searchType === 'misc' && searchValue) {
+			return `任氏有无轩搜索"${searchValue}"的结果，共找到${totalBooks}本相关书籍。`;
+		}
+		return `任氏有无轩藏书总目，共收录${totalBooks}本书籍。浏览完整的个人图书馆藏书列表。`;
+	}
+
+	function getSearchKeywords() {
+		const baseKeywords = '藏书,图书馆,书籍列表,任氏有无轩';
+		
+		if (searchType === 'author' && searchValue) {
+			return `${searchValue},作者,${baseKeywords}`;
+		} else if (searchType === 'tags' && searchValue) {
+			return `${searchValue},标签,分类,${baseKeywords}`;
+		} else if (searchValue) {
+			return `${searchValue},搜索,${baseKeywords}`;
+		}
+		return `${baseKeywords},藏书目录,图书检索`;
+	}
 </script>
 
-<svelte:head>
-	<title>{getSearchTitle()} | 任氏有无轩</title>
-	<meta name="description" content="浏览任氏有无轩的藏书列表" />
-</svelte:head>
+<SEO 
+	title={getSearchTitle()}
+	description={getSearchDescription()}
+	keywords={getSearchKeywords()}
+	type="website"
+/>
 
 <main class="mx-auto max-w-full flex-1 px-4 py-8 sm:px-6 lg:px-8">
 	<!-- Header -->

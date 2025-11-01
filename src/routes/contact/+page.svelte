@@ -1,10 +1,13 @@
 <script lang="ts">
+	import SEO from '$lib/components/SEO.svelte';
 </script>
 
-<svelte:head>
-	<title>联系站长 - 任氏有无轩</title>
-	<meta name="description" content="通过社交媒体或微信与我们联系" />
-</svelte:head>
+<SEO 
+	title="联系站长"
+	description="通过社交媒体、微信或邮件与任氏有无轩站长联系。GitHub、X、Facebook、Instagram等多种联系方式。"
+	keywords="联系方式,站长联系,社交媒体,微信,邮件,GitHub,X,Facebook,Instagram"
+	type="website"
+/>
 
 <div class="container mx-auto px-4 py-8 max-w-4xl">
 	<h1 class="text-4xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">
