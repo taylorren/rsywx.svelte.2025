@@ -152,15 +152,39 @@
 	<meta name="description" content="书籍访问记录和统计信息" />
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 	<div class="mb-8 text-center">
 		<h1 class="mb-4 text-4xl font-bold text-gray-900 dark:text-white">📊 访问记录</h1>
 		<p class="text-lg text-gray-600 dark:text-gray-300">书籍访问记录和统计信息</p>
 	</div>
 
+	<!-- Mobile Navigation (horizontal tabs) -->
+	<div class="block lg:hidden mb-6">
+		<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+			<div class="p-4 border-b border-gray-200 dark:border-gray-700">
+				<h2 class="text-lg font-semibold text-gray-900 dark:text-white">统计类型</h2>
+			</div>
+			<div class="p-2">
+				<div class="grid grid-cols-2 gap-2">
+					{#each navItems as item}
+						<button
+							onclick={() => setActiveTab(item.id)}
+							class="flex flex-col items-center gap-1 px-2 py-3 text-center rounded-md transition-colors {activeTab === item.id 
+								? 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400' 
+								: 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700'}"
+						>
+							<span class="text-lg">{item.icon}</span>
+							<span class="text-xs font-medium leading-tight">{item.label}</span>
+						</button>
+					{/each}
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="flex gap-6">
-		<!-- Left Navigation Panel -->
-		<div class="w-64 shrink-0">
+		<!-- Desktop Left Navigation Panel -->
+		<div class="hidden lg:block w-64 shrink-0">
 			<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 				<div class="p-4 border-b border-gray-200 dark:border-gray-700">
 					<h2 class="text-lg font-semibold text-gray-900 dark:text-white">统计类型</h2>
@@ -181,7 +205,7 @@
 			</div>
 		</div>
 
-		<!-- Right Content Panel -->
+		<!-- Content Panel -->
 		<div class="flex-1 min-w-0">
 			<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md">
 				{#if activeTab === 'recent-visits'}
@@ -236,8 +260,8 @@
 								</div>
 							{:else if visitHistory.length > 0}
 								{@const chartData = getChartData()}
-								<div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-									<svg width="100%" height="320" viewBox="0 0 {chartData.chartWidth} {chartData.chartHeight}" class="overflow-visible">
+								<div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-2 sm:p-4 overflow-x-auto">
+									<svg width="100%" height="320" viewBox="0 0 {chartData.chartWidth} {chartData.chartHeight}" class="overflow-visible min-w-[600px]">
 										<!-- Grid lines -->
 										{#each Array(5) as _, i}
 											{@const y = chartData.padding + (i / 4) * (chartData.chartHeight - 2 * chartData.padding)}
@@ -302,7 +326,7 @@
 
 								<!-- Summary stats -->
 								{#if periodInfo}
-									<div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+									<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 										<div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 text-center">
 											<div class="text-2xl font-bold text-blue-600 dark:text-blue-400">{formatNumber(periodInfo.total_visits)}</div>
 											<div class="text-sm text-blue-600 dark:text-blue-400">总访问量</div>
