@@ -77,25 +77,25 @@
 						src="/images/tr.webp"
 						alt="TR"
 						title="TR the Father"
-						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+						class="h-20 w-20 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
 					/>
 					<img
 						src="/images/gr.webp"
 						alt="GR"
 						title="GR the Mother"
-						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+						class="h-20 w20 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
 					/>
 					<img
 						src="/images/pr.webp"
 						alt="PR"
 						title="PR the Son"
-						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+						class="h-20 w-20 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
 					/>
 					<img
 						src="/images/rt.webp"
 						alt="RT"
 						title="Rafael the Tortoise"
-						class="h-24 w-24 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
+						class="h-20 w-20 cursor-pointer rounded-full object-cover transition-transform hover:scale-110"
 					/>
 				</div>
 			</div>
