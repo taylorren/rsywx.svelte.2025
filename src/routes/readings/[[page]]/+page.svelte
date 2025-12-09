@@ -29,6 +29,12 @@
 		if (content.length <= maxLength) return content;
 		return content.substring(0, maxLength) + '...';
 	}
+
+	function handleImageError(event: Event) {
+		const img = event.target as HTMLImageElement;
+		img.onerror = null;
+		img.src = '/covers/default.jpg';
+	}
 </script>
 
 <SEO 
@@ -103,9 +109,10 @@
 				<article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
 					<div class="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-700">
 						<img 
-							src={review.feature || `/covers/${review.bookid}.jpg`} 
+							src={`/covers/${review.bookid}.jpg`}
 							alt={review.title || review.book_title || '封面图片'}
 							class="w-full h-48 object-cover"
+							onerror={handleImageError}
 							loading="lazy"
 						/>
 					</div>
