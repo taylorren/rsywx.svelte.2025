@@ -6,9 +6,16 @@ export const GET: RequestHandler = async ({ params, url, fetch }) => {
 	const page = params.count || '1'; // count parameter is actually the page number
 	const refresh = url.searchParams.get('refresh') === 'true';
 
+	// Debug environment variables
+	console.log('[API] Environment check:', {
+		RSYWX_API_BASE_URL: process.env.RSYWX_API_BASE_URL,
+		RSYWX_API_KEY: process.env.RSYWX_API_KEY ? 'SET' : 'NOT SET',
+		NODE_ENV: process.env.NODE_ENV
+	});
+
 	try {
 		const headers = {
-			'X-API-Key': RSYWX_API_KEY || 'your_api_key_here'
+			'X-API-Key': process.env.RSYWX_API_KEY || 'your_api_key_here'
 		};
 
 		// Build query parameters
@@ -16,7 +23,11 @@ export const GET: RequestHandler = async ({ params, url, fetch }) => {
 		if (refresh) queryParams.set('refresh', 'true');
 		
 		const queryString = queryParams.toString();
-		const apiUrl = `${RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1'}/readings/reviews/${page}${queryString ? '?' + queryString : ''}`;
+		const baseUrl = process.env.RSYWX_API_BASE_URL || 'https://api.rsywx.com/api/v1';
+		const apiUrl = `${baseUrl}/readings/reviews/${page}${queryString ? '?' + queryString : ''}`;
+		
+		console.log('[API] Final API URL:', apiUrl);
+		console.log('[API] Headers:', headers);
 		
 		const response = await fetch(apiUrl, { headers });
 

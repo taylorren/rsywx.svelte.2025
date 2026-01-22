@@ -3,6 +3,12 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ params, fetch }) => {
 	const page = parseInt(params.page || '1');
 	
+	// Debug environment variables
+	console.log('[Readings] Environment check:', {
+		RSYWX_API_BASE_URL: process.env.RSYWX_API_BASE_URL,
+		NODE_ENV: process.env.NODE_ENV
+	});
+	
 	try {
 		// Note: The API uses [count] parameter but it actually represents the page number
 		const apiUrl = `/api/v1/readings/reviews/${page}`;
