@@ -8,12 +8,16 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         PORT: 3000,
-        HOST: '0.0.0.0'
+        HOST: '0.0.0.0',
+        RSYWX_API_KEY: '4046c526d0a9bd30d045b69105ac74d6723b1f13de04f1565957b8f9c9caa15e',
+        RSYWX_API_BASE_URL: 'https://api.rsywx.com/api/v1'
       },
       env_production: {
         NODE_ENV: 'production',
         PORT: 3000,
-        HOST: '0.0.0.0'
+        HOST: '0.0.0.0',
+        RSYWX_API_KEY: '4046c526d0a9bd30d045b69105ac74d6723b1f13de04f1565957b8f9c9caa15e',
+        RSYWX_API_BASE_URL: 'https://api.rsywx.com/api/v1'
       },
       // Logging
       log_file: './logs/combined.log',
